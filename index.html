@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <style>
+        /* Basic CSS for styling the form */
+        body {
+            font-family: Arial, sans-serif;
+        }
+
+        .container {
+            max-width: 400px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 10px;
+        }
+
+        input[type="text"] {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 15px;
+        }
+
+        button {
+            background-color: #890548;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        /* Styling for the requirement list */
+        #requirementList {
+            max-width: 400px;
+            margin: 20px auto;
+            padding: 10px;
+            border: 1px solid #ccc;
+            background-color: #f8f8f8;
+        }
+
+        #listItems {
+            list-style: none;
+            padding: 0;
+        }
+
+        #listItems li {
+            margin-bottom: 10px;
+            border: 1px solid #ddd;
+            padding: 5px;
+            background-color: #fff;
+        }
+
+        /* Loading animation */
+        .loader {
+            border: 4px solid #f3f3f3;
+            border-top: 4px solid #3498db;
+            border-radius: 50%;
+            width: 30px;
+            height: 30px;
+            animation: spin 2s linear infinite;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+    </style>
+</head>
+<body>
+    <!-- User Data Input Form -->
+    <div class="container">
+        <label for="product">Product:</label>
+        <input type="text" id="product">
+        <label for="link">Link of material:</label>
+        <input type="text" id="link">
+        <button id="submitBtn" onclick="submitForm()">Submit</button>
+    </div>
+
+    <!-- Requirement List -->
+    <div id="requirementList">
+        <h2>Requirement List</h2>
+        <ul id="listItems"></ul>
+    </div>
+
+    <!-- JavaScript for handling form submission -->
+    <script>
+        function submitForm() {
+            const name = document.getElementById("product").value;
+            const email = document.getElementById("link").value;
+            const submitBtn = document.getElementById("submitBtn");
+
+            submitBtn.style.backgroundColor = "#4CAF50"; // Change button color to green
+
+            const loader = document.createElement("div");
+            loader.classList.add("loader");
+            document.body.appendChild(loader); // Display loading animation
+
+            setTimeout(function () {
+                loader.remove(); // Remove loading animation
+                alert(`Thanks for your idea! Your material will be added to the list.`); // Show thank you message
+
+                const list = document.getElementById("listItems");
+                const listItem = document.createElement("li");
+                listItem.textContent = `Product: ${name}, Link: ${email}`;
+                list.appendChild(listItem); // Add user input to the list
+                submitBtn.style.backgroundColor = "#890548"; // Restore button color
+            }, 2000);
+        }
+    </script>
+</body>
+</html>
